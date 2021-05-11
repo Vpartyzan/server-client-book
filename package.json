@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "npx nodemon server.js",
     "build": "cd client && yarn install && yarn build"
   },
   "dependencies": {
