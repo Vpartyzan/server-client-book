@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const db = require('./db');
 
 const app = express();
@@ -8,6 +9,7 @@ const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.urlencoded({ extended: false }));
 app.use('/api', testimonialsRoutes);
