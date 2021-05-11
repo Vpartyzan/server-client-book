@@ -12,17 +12,21 @@ router.route('/seats/:id').get((req, res) => {
 });
 
 router.route('/seats').post((req, res) => {
-  const newSeats = {
-    id: uuidv4(),
-    day: req.body.day,
-    seat: req.body.seat,
-    client: req.body.client,
-    email: req.body.email,
-  };
+  let isSeatFree = db.seats.some( order => order.day == req.body.day && order.seat == req.body.seat);
+  if (!isSeatFree) {
+    const newSeats = {
+      id: uuidv4(),
+      day: req.body.day,
+      seat: req.body.seat,
+      client: req.body.client,
+      email: req.body.email,
+    };
 
-  db.seats.push(newSeats);
-
-  return res.json({message: 'OK'});
+    db.seats.push(newSeats);
+    return res.json({ message: 'OK' });
+  } else {
+    return res.json({ message: "The slot is already taken..." });
+  }   
 });
 
 router.route('/seats/:id').delete((req, res) => {
@@ -31,7 +35,7 @@ router.route('/seats/:id').delete((req, res) => {
   if (element) {
     db.seats.splice(db.seats.indexOf(element), 1);
 
-    return res.json({message: 'OK'});
+    return res.json({ message: 'OK' });
   } else {
     res.json({ message: 'Not found...' });
   }  
