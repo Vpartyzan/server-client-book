@@ -2,6 +2,8 @@ const db = {
   testimonials: [
     { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
     { id: 2, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
+    { id: 3, author: 'Thomas Anderson', text: 'The Matrix has you..' },
+    { id: 4, author: 'Freddie Mercury', text: 'Show must go on' }
   ],
   concerts: [
     { id: 1, performer: 'John Doe', genre: 'Rock', price: 25, day: 1, image: '/img/uploads/1fsd324fsdg.jpg' },

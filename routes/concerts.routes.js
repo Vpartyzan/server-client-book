@@ -34,25 +34,26 @@ router.route('/concerts/:id').delete((req, res) => {
 
     return res.json({message: 'OK'});
   } else {
-    res.json({ message: 'Not found...' });
+    return res.json({ message: 'Not found...' });
   }  
   
 });
 
 router.route('/concerts/:id').put((req, res) => {
-  for (let obj of db.concerts) {
-    if (obj.id == req.params.id) {
-      obj.performer = req.body.performer,
-      obj.genre = req.body.genre;
-      obj.price = req.body.price;
-      obj.day = req.body.day;
-      obj.image = req.body.image;
+  let element = db.concerts.find( v => v.id == req.params.id);
+
+  if (element) {
+    element.performer = req.body.performer,
+    element.genre = req.body.genre;
+    element.price = req.body.price;
+    element.day = req.body.day;
+    element.image = req.body.image;
       
-      return res.json({message: 'OK'});
-    } else {
-      res.json({ message: 'Not found...' });
-    }
+    return res.json({message: 'OK'});
+  } else {
+    return res.json({ message: 'Not found...' });
   }
+  
 });
 
 module.exports = router;

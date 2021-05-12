@@ -35,7 +35,7 @@ router.route('/seats/:id').delete((req, res) => {
   if (element) {
     db.seats.splice(db.seats.indexOf(element), 1);
 
-    return res.json({ message: 'OK' });
+    res.json({ message: 'OK' });
   } else {
     res.json({ message: 'Not found...' });
   }  
@@ -43,19 +43,19 @@ router.route('/seats/:id').delete((req, res) => {
 });
 
 router.route('/seats/:id').put((req, res) => {
-  for (let obj of db.seats) {
-    console.log(obj);
-    if (obj.id == req.params.id) {
-      obj.day = req.body.day,
-      obj.seat = req.body.seat;
-      obj.client = req.body.client;
-      obj.email = req.body.email;
-      
-      return res.json({message: 'OK'});
-    } else {
-      res.json({ message: 'Not found...' });
-    }
+  let element = db.seats.find( v => v.id == req.params.id);
+  
+  if (element) {
+    element.day = req.body.day;
+    element.seat = req.body.seat;
+    element.client = req.body.client;
+    element.email = req.body.email;
+     
+    return res.json({message: 'OK'});
+  } else {
+    return res.json({ message: 'Not found...' });
   }
+  
 });
 
 module.exports = router;

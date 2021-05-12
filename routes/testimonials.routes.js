@@ -29,17 +29,16 @@ router.route('/testimonials').post((req, res) => {
 });
 
 router.route('/testimonials/:id').put((req, res) => {
-  for (let obj of db.testimonials) {
+  let element = db.testimonials.find( v => v.id == req.params.id);
 
-    if (obj.id == req.params.id) {
-      obj.author = req.body.author,
-      obj.text = req.body.text;
-      return res.json({message: 'OK'});
-    } else {
-      res.json({ message: 'Not found...' });
-    }
-
-  };
+  if (element) {
+    element.author = req.body.author;
+    element.text = req.body.text;
+    
+    return res.json(db.testimonials);
+  } else {
+    return res.json({ message: 'Not found...' });
+  }
 });
 
 router.route('/testimonials/:id').delete((req, res) => {
