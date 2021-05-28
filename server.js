@@ -24,17 +24,16 @@ app.use((req, res, next) => {
   next();
 });
 
-/*
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
-});*/
+});
 
 app.use((req, res) => {
   res.status(404).send('404 not found...');
 });
 
 //mongoose.connect('mongodb://localhost:27017/festivalDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb+srv://vPartyzan:071712014260@cluster0.mugct.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://vPartyzan:071712014260@cluster0.mugct.mongodb.net/festivalDB?retryWrites=true&w=majority/festivalDB', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
