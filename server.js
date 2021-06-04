@@ -33,7 +33,8 @@ app.use((req, res) => {
 });
 
 //mongoose.connect('mongodb://localhost:27017/festivalDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb+srv://vPartyzan:071712014260@cluster0.mugct.mongodb.net/festivalDB?retryWrites=true&w=majority/festivalDB', { useNewUrlParser: true, useUnifiedTopology: true });
+const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://vPartyzan:071712014260@cluster0.mugct.mongodb.net/festivalDB?retryWrites=true&w=majority/festivalDB' : 'mongodb://localhost:27017/festivalDB';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -49,3 +50,5 @@ const io = socket(server);
 io.on('connection', (socket) => {
   console.log('New socket');
 });
+
+module.exports = server;
