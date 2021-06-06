@@ -33,7 +33,7 @@ app.use((req, res) => {
 });
 
 //mongoose.connect('mongodb://localhost:27017/festivalDB', { useNewUrlParser: true, useUnifiedTopology: true });
-const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://vPartyzan:071712014260@cluster0.mugct.mongodb.net/festivalDB?retryWrites=true&w=majority/festivalDB' : 'mongodb://localhost:27017/festivalDB';
+const dbURI = process.env.NODE_ENV === 'production' ? `mongodb+srv://${process.env.USER_NAME}:${process.env.USER_KEY}@cluster0.mugct.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority/${process.env.DB_NAME}` : 'mongodb://localhost:27017/festivalDB';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
